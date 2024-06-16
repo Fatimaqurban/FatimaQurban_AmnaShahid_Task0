@@ -26,10 +26,9 @@ print(data)
 import pymongo
 
 # Get the MongoDB connection string from the environment variable
-connection_string=connection_string = os.getenv("MONGO_CONNECTION_STRING")
 
 # Connect to MongoDB Atlas
-Client=pymongo.MongoClient(connection_string)
+Client=pymongo.MongoClient("mongodb+srv://ebayData:Fast2021@cluster0.kl8fsce.mongodb.net/")
 
 # Selecting the database
 db=Client["Ebay_ScrappedData"]
