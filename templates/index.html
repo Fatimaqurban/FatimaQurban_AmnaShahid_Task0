@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebay Product List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            color: rgb(23,23,103);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+
+        }
+        th {
+            background-color: #f2f2f2;
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: rgb(23,23,103);">Ebay Product List</h1>
+    
+    <form action="/search" method="GET" style="padding: 10px; padding-left: 20px;">
+        <input type="text" name="query" placeholder="Search by Title"  style="padding-top: 5px; padding-bottom: 5px;">
+        <input type="text" name="min_price" placeholder="Min Price"  style="padding-top: 5px; padding-bottom: 5px;">
+        <input type="text" name="max_price" placeholder="Max Price"  style="padding-top: 5px; padding-bottom: 5px;">
+        <button type="submit"  style="padding-top: 5px; padding-bottom: 5px; cursor: pointer;">Search</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Author</th>
+                <th>Top-Rated Seller</th>
+                <th>Reviews</th>
+                <th>Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- start of outer for loop to iterate all the data -->
+            {% for product in products %} 
+            <tr>
+                <td>{{ product.Title }}</td>
+                <td>{{ product.Price }}</td>
+                <td>{{ product.Author }}</td>
+                <td>{{ product['Top-Rated Seller'] }}</td>
+                <td>
+                    <ul>
+                        <!-- start of inner for loop to iterate all reviews for 1 product -->
+                        {% for review in product.Reviews %}
+                            <li>{{ review }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>{{ product.Rating }}</td>
+            </tr>
+            <!-- end of outer for loop -->
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
